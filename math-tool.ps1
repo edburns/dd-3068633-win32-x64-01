@@ -1,6 +1,5 @@
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory)]
     [ValidateRange(0, [int]::MaxValue)]
     [int]$N
 )
@@ -11,6 +10,7 @@ $ErrorActionPreference = 'Stop'
 function Get-Fibonacci {
     [CmdletBinding()]
     param(
+        [Parameter(Mandatory)]
         [ValidateRange(0, [int]::MaxValue)]
         [int]$N
     )
@@ -29,6 +29,10 @@ function Get-Fibonacci {
 
 if ($MyInvocation.InvocationName -eq '.') {
     return
+}
+
+if (-not $PSBoundParameters.ContainsKey('N')) {
+    throw 'N is required.'
 }
 
 Write-Output "Fibonacci($N) = $(Get-Fibonacci -N $N)"

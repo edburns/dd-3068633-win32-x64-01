@@ -1,6 +1,6 @@
 Describe 'Get-Fibonacci' {
     BeforeAll {
-        . (Join-Path $PSScriptRoot 'math-tool.ps1') -N 0
+        . (Join-Path $PSScriptRoot 'math-tool.ps1')
     }
 
     It 'returns only the numeric Fibonacci value for <N>' -ForEach @(
