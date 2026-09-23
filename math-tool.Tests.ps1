@@ -31,4 +31,12 @@ Describe 'math-tool CLI' {
         $output.Count | Should -Be 1
         $output[0].ToString() | Should -Be "Fibonacci($N) = $Expected"
     }
+
+    It 'requires N' {
+        $implementationPath = Join-Path $PSScriptRoot 'math-tool.ps1'
+        $output = @(& (Get-Command pwsh -ErrorAction Stop).Source -NoLogo -NoProfile -NonInteractive -File $implementationPath 2>&1)
+
+        $LASTEXITCODE | Should -Not -Be 0
+        ($output | Out-String) | Should -Match 'The -N parameter is required'
+    }
 }
