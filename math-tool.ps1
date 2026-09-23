@@ -28,11 +28,12 @@ function Get-Fibonacci {
 }
 
 if ($MyInvocation.InvocationName -eq '.') {
+    # Avoid CLI output when tests dot-source this script for Get-Fibonacci.
     return
 }
 
 if (-not $PSBoundParameters.ContainsKey('N')) {
-    throw 'N is required.'
+    throw 'The -N parameter is required. Example: ./math-tool.ps1 -N 10'
 }
 
 Write-Output "Fibonacci($N) = $(Get-Fibonacci -N $N)"
