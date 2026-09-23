@@ -7,11 +7,12 @@ Describe 'Get-Fibonacci' {
         @{ N = 0; Expected = 0L }
         @{ N = 1; Expected = 1L }
         @{ N = 7; Expected = 13L }
+        @{ N = 93; Expected = [bigint]'12200160415121876738' }
     ) {
         $result = @(Get-Fibonacci -N $N)
 
         $result.Count | Should -Be 1
-        $result[0] | Should -BeOfType [long]
+        $result[0] | Should -BeOfType [bigint]
         $result[0] | Should -Be $Expected
     }
 }
@@ -21,6 +22,7 @@ Describe 'math-tool CLI' {
         @{ N = 0; Expected = 0L }
         @{ N = 1; Expected = 1L }
         @{ N = 7; Expected = 13L }
+        @{ N = 93; Expected = [bigint]'12200160415121876738' }
     ) {
         $implementationPath = Join-Path $PSScriptRoot 'math-tool.ps1'
         $output = @(& (Get-Command pwsh -ErrorAction Stop).Source -NoLogo -NoProfile -File $implementationPath -N $N 2>&1)
