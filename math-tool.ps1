@@ -4,9 +4,6 @@ param(
     [int]$N
 )
 
-Set-StrictMode -Version Latest
-$ErrorActionPreference = 'Stop'
-
 function Get-Fibonacci {
     [CmdletBinding()]
     param(
@@ -31,6 +28,9 @@ if ($MyInvocation.InvocationName -eq '.') {
     # Avoid CLI output when tests dot-source this script for Get-Fibonacci.
     return
 }
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
 
 if (-not $PSBoundParameters.ContainsKey('N')) {
     throw 'The -N parameter is required. Example: ./math-tool.ps1 -N 10'
