@@ -1,5 +1,6 @@
 [CmdletBinding()]
 param(
+    [Parameter(Mandatory)]
     [ValidateRange(0, [int]::MaxValue)]
     [int]$N
 )
@@ -26,6 +27,8 @@ function Get-Fibonacci {
     return $previous
 }
 
-if ($MyInvocation.InvocationName -ne '.') {
-    Write-Output "Fibonacci($N) = $(Get-Fibonacci -N $N)"
+if ($MyInvocation.InvocationName -eq '.') {
+    return
 }
+
+Write-Output "Fibonacci($N) = $(Get-Fibonacci -N $N)"
